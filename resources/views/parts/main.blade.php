@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="uz">
-    <head>
-        @include('parts.head')
-    </head>
-    <body>
-        <div class="container">
-            @include('parts.header')
-            <main>
-                @yield('main')
-            </main>
-        </div>
-        @include('parts.script')
-    </body>
+
+<head>
+    @include('parts.head')
+    @yield('style')
+</head>
+
+<body>
+    @yield('main')
+    @yield('script')
+</body>
+
 </html>

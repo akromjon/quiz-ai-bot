@@ -26,3 +26,4 @@ plusBtn.addEventListener('click', () => {
 });
 
 updateButtonStates();
+

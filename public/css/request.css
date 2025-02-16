@@ -1,0 +1,560 @@
+:root {
+    --primary-color: #2E7D32;
+    --primary-hover: #1B5E20;
+    --bg-color: #F1F8E9;
+    --text-color: #1B2E1B;
+    --border-color: #A5D6A7;
+    --secondary-bg: #E8F5E9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    line-height: 1.4;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem;
+    background-color: white;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: none;
+    height: 120px;
+    background-color: var(--secondary-bg);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+.format-selection {
+    margin-bottom: 1.5rem;
+}
+
+.format-selection > label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.format-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.format-option input[type="radio"] {
+    display: none;
+}
+
+.format-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background-color: var(--secondary-bg);
+    min-height: 44px;
+}
+
+.format-option svg {
+    transition: all 0.3s ease;
+}
+
+.format-option input[type="radio"]:checked + label {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.format-option input[type="radio"]:checked + label svg {
+    stroke: white;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    margin-top: 1rem;
+    position: sticky;
+    bottom: 1rem;
+}
+
+.submit-btn:active {
+    background-color: var(--primary-hover);
+    transform: translateY(1px);
+}
+
+/* Remove hover effects on mobile */
+@media (hover: none) {
+    .submit-btn:hover {
+        transform: none;
+    }
+
+    .submit-btn:hover svg {
+        transform: none;
+    }
+}
+
+/* Specific adjustments for Telegram Web App */
+@media (display-mode: standalone) {
+    body {
+        background-color: white;
+    }
+
+    .container {
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+/* Handle different screen heights */
+@media (min-height: 700px) {
+    .container {
+        padding-bottom: 2rem;
+    }
+
+    textarea {
+        height: 200px;
+    }
+}
+
+/* Adjust icon size on smaller screens */
+@media (max-width: 380px) {
+    .format-option label {
+        font-size: 0.8rem;
+    }
+
+    .format-option svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+.counter-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.counter-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.counter-btn:hover:not(:disabled) {
+    border-color: #2f7d31;
+    color: var(--white);
+    background: var(--primary);
+}
+
+.counter-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.counter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.counter-input input {
+    width: 80px;
+    height: 48px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    background: var(--white);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.counter-input input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-light);
+    outline: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .counter-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .counter-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .counter-input input {
+        width: 70px;
+        height: 42px;
+        font-size: 16px;
+    }
+}
+
+.analyzing-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--background);
+}
+
+.loader-content {
+    text-align: center;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    max-width: 400px;
+    width: 100%;
+}
+
+.ai-loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulse {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    opacity: 0.6;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.brain-icon {
+    position: relative;
+    z-index: 2;
+    color: var(--primary);
+    animation: float 3s ease-in-out infinite;
+}
+
+.processing-dots {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.processing-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.5;
+}
+
+.processing-dots span:nth-child(1) {
+    animation: dots 1.5s ease-in-out infinite;
+}
+
+.processing-dots span:nth-child(2) {
+    animation: dots 1.5s ease-in-out 0.2s infinite;
+}
+
+.processing-dots span:nth-child(3) {
+    animation: dots 1.5s ease-in-out 0.4s infinite;
+}
+
+.loader-text {
+    margin-top: 20px;
+}
+
+.loader-text h2 {
+    color: var(--text-color);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.loader-text p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes dots {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .loader-content {
+        padding: 30px 20px;
+    }
+
+    .ai-loader {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .brain-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .loader-text h2 {
+        font-size: 20px;
+    }
+
+    .loader-text p {
+        font-size: 14px;
+    }
+}
+
+body{
+    margin: 0;
+}
+
+.analyzing-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--eco-light);
+}
+
+.loader-content {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(46, 204, 113, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.progress-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 32px;
+}
+
+
+.progress-circle {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.progress-value {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--eco-primary);
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.progress-label {
+    font-size: 14px;
+    color: var(--eco-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 4px 0 0 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--eco-light);
+    stroke-width: 8;
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: var(--eco-primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.2s ease;
+}
+
+.loader-text {
+    margin-top: 24px;
+}
+
+.loader-text h2 {
+    color: var(--eco-text);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.loader-text p {
+    color: var(--eco-text-light);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.status-text {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .loader-content {
+        padding: 30px 20px;
+    }
+
+    .progress-container {
+        width: 153px;
+        height: 153px;
+        margin-bottom: 24px;
+    }
+
+    .progress-value {
+        font-size: 40px;
+    }
+
+    .progress-label {
+        font-size: 12px;
+    }
+
+    .loader-text h2 {
+        font-size: 20px;
+    }
+
+    .loader-text p {
+        font-size: 14px;
+    }
+}

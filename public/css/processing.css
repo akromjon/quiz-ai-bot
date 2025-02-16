@@ -1,0 +1,139 @@
+:root {
+    --eco-primary: #2ECC71;
+    --eco-secondary: #27AE60;
+    --eco-light: #EAFAF1;
+    --eco-text: #2C3E50;
+    --eco-text-light: #7F8C8D;
+}
+body{
+    margin: 0;
+}
+
+.analyzing-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--eco-light);
+}
+
+.loader-content {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(46, 204, 113, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.progress-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 32px;
+}
+
+
+.progress-circle {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.progress-value {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--eco-primary);
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.progress-label {
+    font-size: 14px;
+    color: var(--eco-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 4px 0 0 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--eco-light);
+    stroke-width: 8;
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: var(--eco-primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.2s ease;
+}
+
+.loader-text {
+    margin-top: 24px;
+}
+
+.loader-text h2 {
+    color: var(--eco-text);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.loader-text p {
+    color: var(--eco-text-light);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.status-text {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .loader-content {
+        padding: 30px 20px;
+    }
+
+    .progress-container {
+        width: 153px;
+        height: 153px;
+        margin-bottom: 24px;
+    }
+
+    .progress-value {
+        font-size: 40px;
+    }
+
+    .progress-label {
+        font-size: 12px;
+    }
+
+    .loader-text h2 {
+        font-size: 20px;
+    }
+
+    .loader-text p {
+        font-size: 14px;
+    }
+}

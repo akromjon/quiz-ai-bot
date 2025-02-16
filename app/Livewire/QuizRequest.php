@@ -46,7 +46,7 @@ class QuizRequest extends Component
     }
     public function render(): View
     {
-        return view(view: 'livewire.quiz-request');
+        return view(view: 'livewire.quiz.request.index');
     }
 
     public function submit(): void
