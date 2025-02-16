@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuizGeneratorController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('quiz', [QuizGeneratorController::class, 'generate'])->name('quiz.generate');
