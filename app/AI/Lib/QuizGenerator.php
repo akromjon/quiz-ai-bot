@@ -16,29 +16,20 @@ final class QuizGenerator
 
         $prompt = self::makePrompt($numberOfQuizes, $language, $difficulty);
 
-        $stream = $client->chat()->createStreamed([
+        // Request OpenAI response (non-streaming)
+        $response = $client->chat()->create([
             'model' => 'gpt-3.5-turbo-1106',
             'messages' => [
                 ['role' => 'system', 'content' => $prompt],
                 ['role' => 'user', 'content' => $text]
             ],
-            'stream' => true,
-            'response_format' => ['type' => 'json_object'],
+            'response_format' => ['type' => 'json_object'], // ✅ Enforces JSON output
         ]);
 
-        $buffer = '';
+        // Extract response content
+        $quizData = $response->choices[0]->message->content ?? '';
 
-        foreach ($stream as $response) {
-            $chunk = $response->choices[0]->delta->content ?? '';
-            $buffer .= $chunk;
-            // // echo $chunk;
-            // ob_flush();
-            // flush();
-        }
-
-        // ob_get_clean();
-
-        return $buffer;
+        return $quizData;
     }
 
     private static function getClient(): Client
