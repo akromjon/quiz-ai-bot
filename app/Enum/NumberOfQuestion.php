@@ -6,5 +6,5 @@ enum NumberOfQuestion: int
     case TEN = 10;
     case TWENTY = 20;
     case THIRTY = 30;
-    case FIFTY = 50;
+    case FOURTY = 40;
 }

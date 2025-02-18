@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\AI\Model\Model;
 use App\AI\Lib\QuizGenerator;
 use App\Enum\Status;
+use App\Events\QuizProgressUpdated;
 use App\Models\Question;
 use App\Models\QuizRequest;
 use App\Models\Quiz as QuizModel;
@@ -17,84 +19,116 @@ class QuizService
 {
     private const EXPECTED_QUIZ_KEY = 'quizzes';
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct(protected QuizRequest $quizRequest)
-    {
+    public function __construct(
+        protected QuizRequest $quizRequest,
+        protected ?QuizGenerator $quizGenerator = null
+    ) {
+        $this->quizGenerator = $quizGenerator ?? QuizGenerator::make();
     }
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         try {
-
             DB::transaction(function () {
-
-                $this->checkQuizState($this->quizRequest);
-
-                $this->updateQuizRequestStatus(Status::PROCESSING);
-
-                $quizData = $this->generateQuiz();
-
-                $this->validateQuizFormat($quizData);
-
-                $quizModel = $this->createQuizModel($quizData[self::EXPECTED_QUIZ_KEY]);
-
-                $this->createQuestions($quizModel, $quizData[self::EXPECTED_QUIZ_KEY]);
-
-                $this->updateQuizRequestStatus(Status::COMPLETED);
-
+                $this->validateInitialState();
+                $this->processQuizGeneration();
             });
-
         } catch (QuizGenerationException $e) {
-
             $this->handleError($e, 'Quiz Generation Format Error');
-
         } catch (\Exception $e) {
-
             $this->handleError($e, 'Quiz Generation Failed');
         }
     }
 
-    /**
-     * Generate quiz using QuizGenerator.
-     *
-     * @return array
-     */
-    private function generateQuiz(): array
+    private function validateInitialState(): void
     {
-        $quiz = QuizGenerator::generate(
+        $this->checkQuizState($this->quizRequest);
+        $this->updateQuizRequestStatus(Status::PROCESSING);
+    }
+
+    private function processQuizGeneration(): void
+    {
+        $targetQuestionCount = $this->quizRequest->number_of_question->value;
+        $totalGenerated = 0;
+
+        // First attempt to generate all requested questions
+        $quizData = $this->generateAndValidateQuiz($targetQuestionCount);
+
+        $generatedCount = count($quizData[self::EXPECTED_QUIZ_KEY]);
+
+        if ($generatedCount > 0) {
+            $quizModel = $this->createQuizModel($quizData[self::EXPECTED_QUIZ_KEY]);
+            $this->createQuestions($quizModel, $quizData[self::EXPECTED_QUIZ_KEY]);
+            $totalGenerated = $generatedCount;
+        }
+
+        // If we didn't generate all requested questions, try to generate the remaining ones
+        if ($totalGenerated < $targetQuestionCount) {
+            $remainingQuestions = $targetQuestionCount - $totalGenerated;
+
+            // Generate only the remaining questions needed
+            $additionalQuizData = $this->generateAndValidateQuiz($remainingQuestions);
+            $additionalCount = count($additionalQuizData[self::EXPECTED_QUIZ_KEY]);
+
+            if ($additionalCount > 0) {
+                $quizModel = $this->createQuizModel($additionalQuizData[self::EXPECTED_QUIZ_KEY]);
+                $this->createQuestions($quizModel, $additionalQuizData[self::EXPECTED_QUIZ_KEY]);
+                $totalGenerated += $additionalCount;
+            }
+        }
+
+        if ($totalGenerated === 0 && $totalGenerated < $targetQuestionCount) {
+            throw new QuizGenerationException('Failed to generate any valid questions');
+        }
+
+        $this->updateQuizRequestStatus(
+            Status::COMPLETED,
+            [],
+            $totalGenerated
+        );
+    }
+
+    private function generateAndValidateQuiz(int $numberOfQuestions): array
+    {
+        $quiz = $this->quizGenerator->generate(
+            model: Model::GPT_3_5_TURBO,
             text: $this->quizRequest->text,
-            numberOfQuizes: $this->quizRequest->number_of_question->value,
+            numberOfQuizes: $numberOfQuestions,
             language: $this->quizRequest->language,
             difficulty: $this->quizRequest->difficulty
         );
 
-        return json_decode($quiz, true) ?? [];
+        $quizData = json_decode($quiz, true) ?? [];
+        $this->validateQuizFormat($quizData);
+
+        return $quizData;
     }
 
-    /**
-     * Validate the quiz format.
-     *
-     * @param array $quizData
-     * @throws QuizGenerationException
-     */
     private function validateQuizFormat(array $quizData): void
     {
-        if (!isset($quizData[self::EXPECTED_QUIZ_KEY])) {
-            throw new QuizGenerationException('Invalid quiz format: missing quizzes key');
+        if (!isset($quizData[self::EXPECTED_QUIZ_KEY]) || !is_array($quizData[self::EXPECTED_QUIZ_KEY])) {
+            throw new QuizGenerationException('Invalid quiz format: missing or invalid quizzes key');
+        }
+
+        foreach ($quizData[self::EXPECTED_QUIZ_KEY] as $index => $question) {
+            $this->validateQuestionFormat($question, $index);
         }
     }
 
-    /**
-     * Create the quiz model.
-     *
-     * @param array $quizzes
-     * @return QuizModel
-     */
+    private function validateQuestionFormat(array $question, int $index): void
+    {
+        $requiredFields = ['question', 'options', 'answer'];
+        foreach ($requiredFields as $field) {
+            if (!isset($question[$field])) {
+                throw new QuizGenerationException("Invalid question format at index {$index}: missing {$field}");
+            }
+        }
+
+        if (!is_array($question['options']) || count($question['options']) < 2) {
+            throw new QuizGenerationException("Invalid options format at index {$index}: insufficient options");
+        }
+    }
+
     private function createQuizModel(array $quizzes): QuizModel
     {
         return QuizModel::create([
@@ -105,56 +139,41 @@ class QuizService
         ]);
     }
 
-    /**
-     * Create questions and their options.
-     *
-     * @param QuizModel $quizModel
-     * @param array $questions
-     */
     private function createQuestions(QuizModel $quizModel, array $questions): void
     {
         foreach ($questions as $question) {
-            $questionModel = $this->createQuestionModel($quizModel, $question);
-            $this->createQuestionOptions($questionModel, $question);
+            DB::transaction(function () use ($quizModel, $question) {
+                $questionModel = $this->createQuestionModel($quizModel, $question);
+                $this->createQuestionOptions($questionModel, $question);
+            });
         }
     }
 
-    /**
-     * Create a single question model.
-     *
-     * @param QuizModel $quizModel
-     * @param array $question
-     * @return Question
-     */
     private function createQuestionModel(QuizModel $quizModel, array $question): Question
     {
         return $quizModel->questions()->create([
-            'text' => $question['question'],
+            'text' => trim($question['question']),
         ]);
     }
 
-    /**
-     * Create options for a question.
-     *
-     * @param Question $questionModel
-     * @param array $question
-     */
     private function createQuestionOptions(Question $questionModel, array $question): void
     {
+        $correctAnswer = trim($question['answer']);
+
         foreach ($question['options'] as $option) {
+            $optionText = trim($option);
             $questionModel->options()->create([
-                'text' => $option,
-                'is_correct' => $this->isCorrectAnswer($question['answer'], $option),
+                'text' => $optionText,
+                'is_correct' => $this->isCorrectAnswer($correctAnswer, $optionText),
             ]);
         }
     }
 
-    /**
-     * Handle errors during quiz generation.
-     *
-     * @param \Exception $e
-     * @param string $message
-     */
+    private function isCorrectAnswer(string $answer, string $option): bool
+    {
+        return $answer[0] === $option[0];
+    }
+
     private function handleError(\Exception $e, string $message): void
     {
         $error = [
@@ -162,53 +181,31 @@ class QuizService
             'message' => $e->getMessage(),
             'line' => $e->getLine(),
             'file' => $e->getFile(),
+            'trace' => $e->getTraceAsString(),
         ];
 
         Log::error($message, $error);
 
         $this->updateQuizRequestStatus(Status::FAILED, $error);
+
+        throw $e;
     }
 
-    /**
-     * Update QuizRequest status.
-     *
-     * @param Status $status
-     * @param array $reason
-     */
-    private function updateQuizRequestStatus(Status $status, array $reason = []): void
+    private function updateQuizRequestStatus(Status $status, array $reason = [], int $questionCount = 0): void
     {
         $this->quizRequest->update([
             'status' => $status,
             'reason' => empty($reason) ? null : json_encode($reason),
+            'number_of_generated_question' => $questionCount,
         ]);
+
+        broadcast(new QuizProgressUpdated($this->quizRequest))->toOthers();
     }
 
-    /**
-     * Check if an option is the correct answer.
-     *
-     * @param string $answer
-     * @param string $option
-     * @return bool
-     */
-    private function isCorrectAnswer(string $answer, string $option): bool
-    {
-        return str_contains($option, $answer . '. ');
-    }
-
-    /**
-     * Check if an quizrequest is pending state.
-     *
-     * @param QuizRequest $quizRequest
-     * @return bool
-     */
     private function checkQuizState(QuizRequest $quizRequest, Status $status = Status::PENDING): void
     {
         if ($quizRequest->status !== $status) {
-
             throw new QuizGenerationException("The quiz is not in {$status->value} state");
-
         }
     }
-
-
 }

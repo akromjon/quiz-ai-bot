@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\QuizRequest;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,20 +13,14 @@ class QuizProgressUpdated implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
-    public string $uuid;
-    public int $progress;
-    public int $counter;
-
-    public function __construct(string $uuid, int $progress, int $counter)
+    public function __construct(protected QuizRequest $quizRequest)
     {
-        $this->uuid = $uuid;
-        $this->progress = $progress;
-        $this->counter = $counter;
+
     }
 
     public function broadcastOn()
     {
-        return new Channel('quiz.' . $this->uuid);
+        return new Channel('quiz.' . $this->quizRequest->uuid);
     }
 }
 

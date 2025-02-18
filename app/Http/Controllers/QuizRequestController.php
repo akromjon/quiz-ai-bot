@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\Status;
-use App\Models\QuizRequest as QuizRequestModel;
+use App\Service\WordService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class QuizRequestController extends Controller
 {
@@ -13,20 +16,25 @@ class QuizRequestController extends Controller
         return view('pages.quiz.request.index');
     }
 
-    public function show(string $uuid): View
+    public function status(string $uuid): View
     {
-        $quizRequest = QuizRequestModel::where('uuid', $uuid)->firstOrFail();
-
-        return $this->getViewByStatus($quizRequest, $uuid);
+        return view('pages.quiz.processing.index', ['uuid' => $uuid]);
     }
 
-    private function getViewByStatus(QuizRequestModel $quizRequestModel, string $uuid): View
+    public function completed(string $uuid): View
     {
-        return match ($quizRequestModel->status) {
-            Status::PROCESSING => view('pages.quiz.processing.index', ['uuid' => $uuid]),
-            Status::FAILED => view('pages.quiz.failed.index', ['uuid' => $uuid]),
-            Status::COMPLETED => view('pages.quiz.completed.index', ['uuid' => $uuid]),
-            default => view('pages.quiz.processing.index', ['uuid' => $uuid]),
-        };
+        return view('pages.quiz.completed.index', ['uuid' => $uuid]);
     }
+
+    public function word(string $uuid): JsonResponse|RedirectResponse
+    {
+        $wordPath = WordService::make()->get($uuid);
+
+        if (empty($wordPath)) {
+            return response()->json(status: 404);
+        }
+
+        return Redirect::to($wordPath);
+    }
+
 }

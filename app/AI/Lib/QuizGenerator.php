@@ -2,43 +2,137 @@
 
 namespace App\AI\Lib;
 
+use App\AI\Model\Model;
 use App\AI\Prompt\Quiz;
 use App\Enum\Difficulty;
 use App\Enum\Language;
 use OpenAI\Client;
 use OpenAI;
+use InvalidArgumentException;
+use RuntimeException;
+use JsonException;
 
 final class QuizGenerator
 {
-    public static function generate(string $text, int $numberOfQuizes, Language $language, Difficulty $difficulty): string
+    private static ?self $instance = null;
+    private Client $client;
+    /**
+     * Private constructor to prevent direct creation
+     *
+     * @throws RuntimeException If OpenAI client creation fails
+     */
+    private function __construct()
     {
-        $client = self::getClient();
+        $apiKey = config('openai.api_key');
 
-        $prompt = self::makePrompt($numberOfQuizes, $language, $difficulty);
+        if (empty($apiKey)) {
 
-        // Request OpenAI response (non-streaming)
-        $response = $client->chat()->create([
-            'model' => 'gpt-3.5-turbo-1106',
-            'messages' => [
-                ['role' => 'system', 'content' => $prompt],
-                ['role' => 'user', 'content' => $text]
-            ],
-            'response_format' => ['type' => 'json_object'], // ✅ Enforces JSON output
-        ]);
+            throw new RuntimeException('OpenAI API key not configured');
+        }
 
-        // Extract response content
-        $quizData = $response->choices[0]->message->content ?? '';
-
-        return $quizData;
+        $this->client = OpenAI::client($apiKey);
     }
 
-    private static function getClient(): Client
+    /**
+     * Prevent cloning of the instance
+     */
+    private function __clone()
     {
-        return OpenAI::client(config('openai.api_key'));
     }
 
-    private static function makePrompt(int $numberOfQuizes, Language $language, Difficulty $difficulty): string
+    /**
+     * Prevent unserialize of the instance
+     */
+    public function __wakeup()
     {
+        throw new RuntimeException('Cannot unserialize singleton');
+    }
+
+    /**
+     * Gets the singleton instance of QuizGenerator
+     *
+     * @return self
+     */
+    public static function make(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Generates quiz questions based on the provided text
+     *
+     * @param string $text Input text to generate questions from
+     * @param int $numberOfQuizes Number of questions to generate
+     * @param Language $language Language for the questions
+     * @param Difficulty $difficulty Difficulty level
+     * @return string JSON string containing quiz data
+     * @throws RuntimeException If API call fails
+     * @throws JsonException If JSON parsing fails
+     */
+    public function generate(
+        Model $model,
+        string $text,
+        int $numberOfQuizes,
+        Language $language,
+        Difficulty $difficulty
+    ): string {
+        if (empty($text)) {
+            throw new InvalidArgumentException('Input text cannot be empty');
+        }
+
+        if ($numberOfQuizes < 1) {
+            throw new InvalidArgumentException('Number of quizzes must be positive');
+        }
+
+        $prompt = $this->makePrompt($numberOfQuizes, $language, $difficulty);
+
+        try {
+            $response = $this->client->chat()->create([
+                'model' => $model->value,
+                'messages' => [
+                    ['role' => 'system', 'content' => $prompt],
+                    ['role' => 'user', 'content' => $text]
+                ],
+                'response_format' => ['type' => 'json_object'],
+            ]);
+
+            $quizData = $response->choices[0]->message->content ?? '';
+
+            if (empty($quizData)) {
+                throw new RuntimeException('Empty response received from OpenAI');
+            }
+
+            // Validate JSON structure
+            json_decode($quizData, true, 512, JSON_THROW_ON_ERROR);
+
+            return $quizData;
+
+        } catch (\Exception $e) {
+            throw new RuntimeException(
+                "Failed to generate quiz: {$e->getMessage()}",
+                0,
+                $e
+            );
+        }
+    }
+
+    /**
+     * Creates the prompt for quiz generation
+     *
+     * @param int $numberOfQuizes
+     * @param Language $language
+     * @param Difficulty $difficulty
+     * @return string
+     */
+    private function makePrompt(
+        int $numberOfQuizes,
+        Language $language,
+        Difficulty $difficulty
+    ): string {
         return Quiz::get($numberOfQuizes, $language, $difficulty);
     }
 }

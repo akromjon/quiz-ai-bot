@@ -27,7 +27,7 @@ class QuizCompleted extends Component
     private function getViewByQuizType(QuizRequestModel $quizRequestModel): View
     {
         return match ($quizRequestModel->type) {
-            Type::MULTIPLE_CHOICE => view('livewire.quiz.completed.multiple-choice.index', ['questions' => $quizRequestModel->quiz->questions]),
+            Type::MULTIPLE_CHOICE => view('livewire.quiz.completed.multiple-choice.index', ['quizzes' => $quizRequestModel->quizzes]),
         };
     }
 }

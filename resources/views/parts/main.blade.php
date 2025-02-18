@@ -4,6 +4,7 @@
 <head>
     @include('parts.head')
     @yield('style')
+    @yield('head')
 </head>
 
 <body>

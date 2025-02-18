@@ -10,7 +10,7 @@ use App\Enum\Status;
 use App\Enum\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class QuizRequest extends Model
@@ -39,8 +39,8 @@ class QuizRequest extends Model
         ];
     }
 
-    public function quiz(): HasOne
+    public function quizzes(): HasMany
     {
-        return $this->hasOne(Quiz::class);
+        return $this->hasMany(Quiz::class);
     }
 }

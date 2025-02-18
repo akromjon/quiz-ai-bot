@@ -6,19 +6,27 @@
         <main>
             <form action="">
                 <div class="quiz-results">
-                    @foreach ($questions as $k => $q)
-                    <div class="question-card">
-                        <h2 class="question-number">Savol {{$k+1}}</h2>
-                        <p class="question-text">{{$q->text}}</p>
-                        <div class="options">
-                            @foreach ($q->options as $o)
-                            <div class="option">
-                                <input type="radio" id="{{$o->id}}" name="answer_{{$o->id}}">
-                                <label for="{{$o->id}}">{{$o->text}}</label>
+                    @php
+                        $counter=0;
+                    @endphp
+                    @foreach ($quizzes as $quiz)
+                        @foreach ($quiz->questions as $q)
+                        @php
+                            $counter++;
+                        @endphp
+                        <div class="question-card">
+                            <h2 class="question-number">Savol {{$counter}}</h2>
+                            <p class="question-text">{{$q->text}}</p>
+                            <div class="options">
+                                @foreach ($q->options as $o)
+                                <div class="option">
+                                    <input type="radio" id="{{$o->id}}" name="answer_{{$o->id}}">
+                                    <label for="{{$o->id}}">{{$o->text}}</label>
+                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
-                    </div>
+                        @endforeach
                     @endforeach
                 </div>
                 <div class="actions">
