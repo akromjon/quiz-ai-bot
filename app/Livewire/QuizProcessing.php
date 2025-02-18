@@ -2,40 +2,41 @@
 
 namespace App\Livewire;
 
-use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use App\Models\QuizRequest as QuizRequestModel;
+use App\Events\QuizProgressUpdated;
+use App\Models\QuizRequest;
 
 class QuizProcessing extends Component
 {
     public string $uuid;
     public int $progress = 0;
-    public int $counter=0;
-
-    public QuizRequestModel $quizRequestModel;
+    public int $counter = 0;
+    public QuizRequest $quizRequestModel;
 
     public function mount(string $uuid): void
     {
         $this->uuid = $uuid;
-
-        $this->quizRequestModel = QuizRequestModel::where("uuid", $this->uuid)->first();
-
-        $this->updateProgress();
+        $this->quizRequestModel = QuizRequest::where("uuid", $this->uuid)->first();
     }
 
-    public function updateProgress(): void
+    public function getListeners()
     {
-        $this->counter++;
-
-        $this->progress=100*$this->counter/$this->quizRequestModel->number_of_question->value;
-
+        return [
+            "echo:quiz.{$this->uuid},QuizProgressUpdated" => 'receiveProgressUpdate'
+        ];
     }
 
-    public function render(): View
+    public function receiveProgressUpdate($payload): void
+    {
+        $this->progress = $payload['progress'];
+        $this->counter = $payload['counter'];
+    }
+
+    public function render()
     {
         return view('livewire.quiz.processing.index', [
             'progress' => $this->progress,
-            'quizRequestModel'=> $this->quizRequestModel,
         ]);
     }
 }
+

@@ -1,8 +1,8 @@
-<div class="container analyzing-container" @if($progress < 100) wire:poll.1s="updateProgress" @endif>
+<div class="container analyzing-container">
     <div class="loader-content">
         <div class="progress-container">
             <div class="progress-circle">
-                <div class="progress-value">{{ $counter }}/{{$quizRequestModel->number_of_question}}</div>
+                <div class="progress-value">{{ $counter }}/{{ $quizRequestModel->number_of_question }}</div>
                 <div class="progress-label">Savollar</div>
             </div>
             <svg class="progress-ring" width="160" height="160">

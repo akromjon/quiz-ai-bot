@@ -6,5 +6,5 @@
     @livewire('quiz-processing',['uuid'=>$uuid])
 @endsection
 @section('script')
-<script src="{{asset('js/processing.js')}}"></script>
+{{-- <script src="{{asset('js/processing.js')}}"></script> --}}
 @endsection
