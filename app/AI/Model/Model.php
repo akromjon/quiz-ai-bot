@@ -8,6 +8,8 @@ enum Model: string
     case GPT_4 = 'gpt-4';
     case GPT_3_5_TURBO = 'gpt-3.5-turbo-1106';
     case GPT_3_5_TURBO_16K = 'gpt-3.5-turbo-16k';
+    case GPT_4O='gpt-4o';
+    case GPT_4O_MINI= 'gpt-4o-mini';
 
     /**
      * Get the maximum tokens for the model

@@ -91,7 +91,7 @@ class QuizService
     private function generateAndValidateQuiz(int $numberOfQuestions): array
     {
         $quiz = $this->quizGenerator->generate(
-            model: Model::GPT_3_5_TURBO,
+            model: Model::GPT_4O,
             text: $this->quizRequest->text,
             numberOfQuizes: $numberOfQuestions,
             language: $this->quizRequest->language,
