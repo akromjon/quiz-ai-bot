@@ -2,8 +2,8 @@
     <div class="loader-wrapper">
         <div class="loader"></div>
         <div class="loader-text">
-            <h2>Matn Tekshirilmoqda</h2>
-            <p>Iltimos kuting...</p>
+            <h2>Testlar generatsiya qilinmoqda</h2>
+            <p>Savollar tayyorlanmoqda...</p>
         </div>
     </div>
 </div>

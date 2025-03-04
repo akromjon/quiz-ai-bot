@@ -24,6 +24,10 @@ return new class extends Migration {
             $table->unsignedInteger('number_of_question')->default(10);
             $table->unsignedInteger('number_of_generated_question')->default(0);
             $table->string('type')->default('multiple choice');
+            $table->unsignedBigInteger('prompt_tokens')->default(0);
+            $table->unsignedBigInteger('completion_tokens')->default(0);
+            $table->float('total_price')->default(0);
+            $table->string('model');
             $table->timestamps();
         });
     }

@@ -11,6 +11,8 @@ Route::prefix('/')->group(function (): void {
     Route::get('/{uuid}/completed', [QuizRequestController::class, 'completed'])->name('quiz.completed');
     Route::get('/{uuid}.docx', [QuizRequestController::class, 'word'])->name('quiz.word');
     Route::get('/{uuid}.pdf', [QuizRequestController::class, 'pdf'])->name('quiz.pdf');
+    Route::get('/{user_uuid}/list', [QuizRequestController::class, 'list'])->name('quiz.list');
+
 
 
 

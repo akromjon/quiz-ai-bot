@@ -1,0 +1,279 @@
+country_name,"CONCAT(\"https://12go.asia/en/feed/travel/\",country_id,\".csv\")"
+Abkhazia                                            ,https://12go.asia/en/feed/travel/AB.csv
+Andorra                                         ,https://12go.asia/en/feed/travel/AD.csv
+United Arab Emirates                                            ,https://12go.asia/en/feed/travel/AE.csv
+Afghanistan                                         ,https://12go.asia/en/feed/travel/AF.csv
+Antigua and Barbuda                                         ,https://12go.asia/en/feed/travel/AG.csv
+Anguilla                                            ,https://12go.asia/en/feed/travel/AI.csv
+Akrotiri and Dhekelia                                           ,https://12go.asia/en/feed/travel/AK.csv
+Albania                                         ,https://12go.asia/en/feed/travel/AL.csv
+Armenia                                         ,https://12go.asia/en/feed/travel/AM.csv
+Angola                                          ,https://12go.asia/en/feed/travel/AO.csv
+Antarctica                                          ,https://12go.asia/en/feed/travel/AQ.csv
+Argentina                                           ,https://12go.asia/en/feed/travel/AR.csv
+American Samoa                                          ,https://12go.asia/en/feed/travel/AS.csv
+Austria                                         ,https://12go.asia/en/feed/travel/AT.csv
+Australia                                           ,https://12go.asia/en/feed/travel/AU.csv
+Aruba                                           ,https://12go.asia/en/feed/travel/AW.csv
+Aland Islands                                           ,https://12go.asia/en/feed/travel/AX.csv
+Azerbaijan                                          ,https://12go.asia/en/feed/travel/AZ.csv
+Bosnia and Herzegovina                                          ,https://12go.asia/en/feed/travel/BA.csv
+Barbados                                            ,https://12go.asia/en/feed/travel/BB.csv
+Bangladesh                                          ,https://12go.asia/en/feed/travel/BD.csv
+Belgium                                         ,https://12go.asia/en/feed/travel/BE.csv
+Burkina Faso                                            ,https://12go.asia/en/feed/travel/BF.csv
+Bulgaria                                            ,https://12go.asia/en/feed/travel/BG.csv
+Bahrain                                         ,https://12go.asia/en/feed/travel/BH.csv
+Burundi                                         ,https://12go.asia/en/feed/travel/BI.csv
+Benin                                           ,https://12go.asia/en/feed/travel/BJ.csv
+Saint Barthelemy                                            ,https://12go.asia/en/feed/travel/BL.csv
+Bermuda                                         ,https://12go.asia/en/feed/travel/BM.csv
+Brunei                                          ,https://12go.asia/en/feed/travel/BN.csv
+Bolivia                                         ,https://12go.asia/en/feed/travel/BO.csv
+British Antarctic Territory                                         ,https://12go.asia/en/feed/travel/BQ.csv
+Brazil                                          ,https://12go.asia/en/feed/travel/BR.csv
+Bahamas                                         ,https://12go.asia/en/feed/travel/BS.csv
+Bhutan                                          ,https://12go.asia/en/feed/travel/BT.csv
+Bouvet Island                                           ,https://12go.asia/en/feed/travel/BV.csv
+Botswana                                            ,https://12go.asia/en/feed/travel/BW.csv
+Belarus                                         ,https://12go.asia/en/feed/travel/BY.csv
+Belize                                          ,https://12go.asia/en/feed/travel/BZ.csv
+Canada                                          ,https://12go.asia/en/feed/travel/CA.csv
+Cocos Islands                                           ,https://12go.asia/en/feed/travel/CC.csv
+Congo Kinshasa                                          ,https://12go.asia/en/feed/travel/CD.csv
+Central African Republic                                            ,https://12go.asia/en/feed/travel/CF.csv
+Congo Brazzaville                                           ,https://12go.asia/en/feed/travel/CG.csv
+Switzerland                                         ,https://12go.asia/en/feed/travel/CH.csv
+Cote dIvoire                                            ,https://12go.asia/en/feed/travel/CI.csv
+Cook Islands                                            ,https://12go.asia/en/feed/travel/CK.csv
+Chile                                           ,https://12go.asia/en/feed/travel/CL.csv
+Cameroon                                            ,https://12go.asia/en/feed/travel/CM.csv
+China                                           ,https://12go.asia/en/feed/travel/CN.csv
+Colombia                                            ,https://12go.asia/en/feed/travel/CO.csv
+Crimea                                          ,https://12go.asia/en/feed/travel/CP.csv
+Sark                                            ,https://12go.asia/en/feed/travel/CQ.csv
+Costa Rica                                          ,https://12go.asia/en/feed/travel/CR.csv
+Canton and Enderbury Islands                                            ,https://12go.asia/en/feed/travel/CT.csv
+Cuba                                            ,https://12go.asia/en/feed/travel/CU.csv
+Cape Verde                                          ,https://12go.asia/en/feed/travel/CV.csv
+Curacao                                         ,https://12go.asia/en/feed/travel/CW.csv
+Christmas Island                                            ,https://12go.asia/en/feed/travel/CX.csv
+Cyprus                                          ,https://12go.asia/en/feed/travel/CY.csv
+Czech Republic                                          ,https://12go.asia/en/feed/travel/CZ.csv
+Germany                                         ,https://12go.asia/en/feed/travel/DE.csv
+Djibouti                                            ,https://12go.asia/en/feed/travel/DJ.csv
+Denmark                                         ,https://12go.asia/en/feed/travel/DK.csv
+Dominica                                            ,https://12go.asia/en/feed/travel/DM.csv
+Dominican Republic                                          ,https://12go.asia/en/feed/travel/DO.csv
+Algeria                                         ,https://12go.asia/en/feed/travel/DZ.csv
+Ecuador                                         ,https://12go.asia/en/feed/travel/EC.csv
+Estonia                                         ,https://12go.asia/en/feed/travel/EE.csv
+Egypt                                           ,https://12go.asia/en/feed/travel/EG.csv
+Western Sahara                                          ,https://12go.asia/en/feed/travel/EH.csv
+Eritrea                                         ,https://12go.asia/en/feed/travel/ER.csv
+Spain                                           ,https://12go.asia/en/feed/travel/ES.csv
+Ethiopia                                            ,https://12go.asia/en/feed/travel/ET.csv
+Sint Eustatius                                          ,https://12go.asia/en/feed/travel/EU.csv
+Finland                                         ,https://12go.asia/en/feed/travel/FI.csv
+Fiji                                            ,https://12go.asia/en/feed/travel/FJ.csv
+Falkland Islands                                            ,https://12go.asia/en/feed/travel/FK.csv
+Micronesia                                          ,https://12go.asia/en/feed/travel/FM.csv
+Faroe Islands                                           ,https://12go.asia/en/feed/travel/FO.csv
+French Southern and Antarctic Territories                                           ,https://12go.asia/en/feed/travel/FQ.csv
+France                                          ,https://12go.asia/en/feed/travel/FR.csv
+Metropolitan France                                         ,https://12go.asia/en/feed/travel/FX.csv
+Gabon                                           ,https://12go.asia/en/feed/travel/GA.csv
+UK                                          ,https://12go.asia/en/feed/travel/GB.csv
+Grenada                                         ,https://12go.asia/en/feed/travel/GD.csv
+Georgia                                         ,https://12go.asia/en/feed/travel/GE.csv
+French Guiana                                           ,https://12go.asia/en/feed/travel/GF.csv
+Guernsey                                            ,https://12go.asia/en/feed/travel/GG.csv
+Ghana                                           ,https://12go.asia/en/feed/travel/GH.csv
+Gibraltar                                           ,https://12go.asia/en/feed/travel/GI.csv
+Greenland                                           ,https://12go.asia/en/feed/travel/GL.csv
+Gambia                                          ,https://12go.asia/en/feed/travel/GM.csv
+Guinea                                          ,https://12go.asia/en/feed/travel/GN.csv
+Guadeloupe                                          ,https://12go.asia/en/feed/travel/GP.csv
+Equatorial Guinea                                           ,https://12go.asia/en/feed/travel/GQ.csv
+Greece                                          ,https://12go.asia/en/feed/travel/GR.csv
+South Georgia and the South Sandwich Islands                                            ,https://12go.asia/en/feed/travel/GS.csv
+Guatemala                                           ,https://12go.asia/en/feed/travel/GT.csv
+Guam                                            ,https://12go.asia/en/feed/travel/GU.csv
+Guinea Bissau                                           ,https://12go.asia/en/feed/travel/GW.csv
+Guyana                                          ,https://12go.asia/en/feed/travel/GY.csv
+Hong Kong                                           ,https://12go.asia/en/feed/travel/HK.csv
+Heard Island and McDonald Islands                                           ,https://12go.asia/en/feed/travel/HM.csv
+Honduras                                            ,https://12go.asia/en/feed/travel/HN.csv
+Croatia                                         ,https://12go.asia/en/feed/travel/HR.csv
+Haiti                                           ,https://12go.asia/en/feed/travel/HT.csv
+Hungary                                         ,https://12go.asia/en/feed/travel/HU.csv
+Ascension Island                                            ,https://12go.asia/en/feed/travel/IA.csv
+Bonaire                                         ,https://12go.asia/en/feed/travel/IB.csv
+Indonesia                                           ,https://12go.asia/en/feed/travel/ID.csv
+Ireland                                         ,https://12go.asia/en/feed/travel/IE.csv
+Israel                                          ,https://12go.asia/en/feed/travel/IL.csv
+Isle of Man                                         ,https://12go.asia/en/feed/travel/IM.csv
+India                                           ,https://12go.asia/en/feed/travel/IN.csv
+British Indian Ocean Territory                                          ,https://12go.asia/en/feed/travel/IO.csv
+Iraq                                            ,https://12go.asia/en/feed/travel/IQ.csv
+Iran                                            ,https://12go.asia/en/feed/travel/IR.csv
+Iceland                                         ,https://12go.asia/en/feed/travel/IS.csv
+Italy                                           ,https://12go.asia/en/feed/travel/IT.csv
+Jersey                                          ,https://12go.asia/en/feed/travel/JE.csv
+Jamaica                                         ,https://12go.asia/en/feed/travel/JM.csv
+Jordan                                          ,https://12go.asia/en/feed/travel/JO.csv
+Japan                                           ,https://12go.asia/en/feed/travel/JP.csv
+Johnston Island                                         ,https://12go.asia/en/feed/travel/JT.csv
+Kenya                                           ,https://12go.asia/en/feed/travel/KE.csv
+Kyrgyzstan                                          ,https://12go.asia/en/feed/travel/KG.csv
+Cambodia                                            ,https://12go.asia/en/feed/travel/KH.csv
+Kiribati                                            ,https://12go.asia/en/feed/travel/KI.csv
+Comoros                                         ,https://12go.asia/en/feed/travel/KM.csv
+Saint Kitts and Nevis                                           ,https://12go.asia/en/feed/travel/KN.csv
+North Korea                                         ,https://12go.asia/en/feed/travel/KP.csv
+South Korea                                         ,https://12go.asia/en/feed/travel/KR.csv
+Kosovo                                          ,https://12go.asia/en/feed/travel/KV.csv
+Kuwait                                          ,https://12go.asia/en/feed/travel/KW.csv
+Cayman Islands                                          ,https://12go.asia/en/feed/travel/KY.csv
+Kazakhstan                                          ,https://12go.asia/en/feed/travel/KZ.csv
+Laos                                            ,https://12go.asia/en/feed/travel/LA.csv
+Lebanon                                         ,https://12go.asia/en/feed/travel/LB.csv
+Saint Lucia                                         ,https://12go.asia/en/feed/travel/LC.csv
+Liechtenstein                                           ,https://12go.asia/en/feed/travel/LI.csv
+Sri Lanka                                           ,https://12go.asia/en/feed/travel/LK.csv
+Liberia                                         ,https://12go.asia/en/feed/travel/LR.csv
+Lesotho                                         ,https://12go.asia/en/feed/travel/LS.csv
+Lithuania                                           ,https://12go.asia/en/feed/travel/LT.csv
+Luxembourg                                          ,https://12go.asia/en/feed/travel/LU.csv
+Latvia                                          ,https://12go.asia/en/feed/travel/LV.csv
+Libya                                           ,https://12go.asia/en/feed/travel/LY.csv
+Morocco                                         ,https://12go.asia/en/feed/travel/MA.csv
+Monaco                                          ,https://12go.asia/en/feed/travel/MC.csv
+Moldova                                         ,https://12go.asia/en/feed/travel/MD.csv
+Montenegro                                          ,https://12go.asia/en/feed/travel/ME.csv
+Saint Martin                                            ,https://12go.asia/en/feed/travel/MF.csv
+Madagascar                                          ,https://12go.asia/en/feed/travel/MG.csv
+Marshall Islands                                            ,https://12go.asia/en/feed/travel/MH.csv
+Midway Islands                                          ,https://12go.asia/en/feed/travel/MI.csv
+Macedonia                                           ,https://12go.asia/en/feed/travel/MK.csv
+Mali                                            ,https://12go.asia/en/feed/travel/ML.csv
+Myanmar                                         ,https://12go.asia/en/feed/travel/MM.csv
+Mongolia                                            ,https://12go.asia/en/feed/travel/MN.csv
+Macau                                           ,https://12go.asia/en/feed/travel/MO.csv
+Northern Mariana Islands                                            ,https://12go.asia/en/feed/travel/MP.csv
+Martinique                                          ,https://12go.asia/en/feed/travel/MQ.csv
+Mauritania                                          ,https://12go.asia/en/feed/travel/MR.csv
+Montserrat                                          ,https://12go.asia/en/feed/travel/MS.csv
+Malta                                           ,https://12go.asia/en/feed/travel/MT.csv
+Mauritius                                           ,https://12go.asia/en/feed/travel/MU.csv
+Maldives                                            ,https://12go.asia/en/feed/travel/MV.csv
+Malawi                                          ,https://12go.asia/en/feed/travel/MW.csv
+Mexico                                          ,https://12go.asia/en/feed/travel/MX.csv
+Malaysia                                            ,https://12go.asia/en/feed/travel/MY.csv
+Mozambique                                          ,https://12go.asia/en/feed/travel/MZ.csv
+Namibia                                         ,https://12go.asia/en/feed/travel/NA.csv
+New Caledonia                                           ,https://12go.asia/en/feed/travel/NC.csv
+Niger                                           ,https://12go.asia/en/feed/travel/NE.csv
+Norfolk Island                                          ,https://12go.asia/en/feed/travel/NF.csv
+Nigeria                                         ,https://12go.asia/en/feed/travel/NG.csv
+Nicaragua                                           ,https://12go.asia/en/feed/travel/NI.csv
+Northern Cyprus                                         ,https://12go.asia/en/feed/travel/NK.csv
+Netherlands                                         ,https://12go.asia/en/feed/travel/NL.csv
+Norway                                          ,https://12go.asia/en/feed/travel/NO.csv
+Nepal                                           ,https://12go.asia/en/feed/travel/NP.csv
+Dronning Maud Land                                          ,https://12go.asia/en/feed/travel/NQ.csv
+Nauru                                           ,https://12go.asia/en/feed/travel/NR.csv
+Neutral Zone                                            ,https://12go.asia/en/feed/travel/NT.csv
+Niue                                            ,https://12go.asia/en/feed/travel/NU.csv
+New Zealand                                         ,https://12go.asia/en/feed/travel/NZ.csv
+Alderney                                            ,https://12go.asia/en/feed/travel/OD.csv
+Oman                                            ,https://12go.asia/en/feed/travel/OM.csv
+South Ossetia                                           ,https://12go.asia/en/feed/travel/OS.csv
+Panama                                          ,https://12go.asia/en/feed/travel/PA.csv
+Pacific Islands Trust Territory                                         ,https://12go.asia/en/feed/travel/PC.csv
+Transnistria                                            ,https://12go.asia/en/feed/travel/PD.csv
+Peru                                            ,https://12go.asia/en/feed/travel/PE.csv
+French Polynesia                                            ,https://12go.asia/en/feed/travel/PF.csv
+Papua New Guinea                                            ,https://12go.asia/en/feed/travel/PG.csv
+Philippines                                         ,https://12go.asia/en/feed/travel/PH.csv
+Pakistan                                            ,https://12go.asia/en/feed/travel/PK.csv
+Poland                                          ,https://12go.asia/en/feed/travel/PL.csv
+Saint Pierre and Miquelon                                           ,https://12go.asia/en/feed/travel/PM.csv
+Pitcairn Islands                                            ,https://12go.asia/en/feed/travel/PN.csv
+Puerto Rico                                         ,https://12go.asia/en/feed/travel/PR.csv
+Palestinian Territories                                         ,https://12go.asia/en/feed/travel/PS.csv
+Portugal                                            ,https://12go.asia/en/feed/travel/PT.csv
+United States Miscellaneous Pacific Islands                                         ,https://12go.asia/en/feed/travel/PU.csv
+Palau                                           ,https://12go.asia/en/feed/travel/PW.csv
+Paraguay                                            ,https://12go.asia/en/feed/travel/PY.csv
+Panama Canal Zone                                           ,https://12go.asia/en/feed/travel/PZ.csv
+Qatar                                           ,https://12go.asia/en/feed/travel/QA.csv
+Republic of Artsakh                                         ,https://12go.asia/en/feed/travel/RA.csv
+Reunion                                         ,https://12go.asia/en/feed/travel/RE.csv
+Romania                                         ,https://12go.asia/en/feed/travel/RO.csv
+Serbia                                          ,https://12go.asia/en/feed/travel/RS.csv
+Russia                                          ,https://12go.asia/en/feed/travel/RU.csv
+Rwanda                                          ,https://12go.asia/en/feed/travel/RW.csv
+Saudi Arabia                                            ,https://12go.asia/en/feed/travel/SA.csv
+Solomon Islands                                         ,https://12go.asia/en/feed/travel/SB.csv
+Seychelles                                          ,https://12go.asia/en/feed/travel/SC.csv
+Sudan                                           ,https://12go.asia/en/feed/travel/SD.csv
+Sweden                                          ,https://12go.asia/en/feed/travel/SE.csv
+Somaliland                                          ,https://12go.asia/en/feed/travel/SF.csv
+Singapore                                           ,https://12go.asia/en/feed/travel/SG.csv
+Saint Helena                                            ,https://12go.asia/en/feed/travel/SH.csv
+Slovenia                                            ,https://12go.asia/en/feed/travel/SI.csv
+Svalbard and Jan Mayen                                          ,https://12go.asia/en/feed/travel/SJ.csv
+Slovakia                                            ,https://12go.asia/en/feed/travel/SK.csv
+Sierra Leone                                            ,https://12go.asia/en/feed/travel/SL.csv
+San Marino                                          ,https://12go.asia/en/feed/travel/SM.csv
+Senegal                                         ,https://12go.asia/en/feed/travel/SN.csv
+Somalia                                         ,https://12go.asia/en/feed/travel/SO.csv
+Sahrawi Republic                                            ,https://12go.asia/en/feed/travel/SP.csv
+Saba                                            ,https://12go.asia/en/feed/travel/SQ.csv
+Suriname                                            ,https://12go.asia/en/feed/travel/SR.csv
+South Sudan                                         ,https://12go.asia/en/feed/travel/SS.csv
+Sao Tome and Principe                                           ,https://12go.asia/en/feed/travel/ST.csv
+Union of Soviet Socialist Republics                                         ,https://12go.asia/en/feed/travel/SU.csv
+El Salvador                                         ,https://12go.asia/en/feed/travel/SV.csv
+Sint Maarten                                            ,https://12go.asia/en/feed/travel/SX.csv
+Syria                                           ,https://12go.asia/en/feed/travel/SY.csv
+Swaziland                                           ,https://12go.asia/en/feed/travel/SZ.csv
+Turks and Caicos Islands                                            ,https://12go.asia/en/feed/travel/TC.csv
+Chad                                            ,https://12go.asia/en/feed/travel/TD.csv
+Togo                                            ,https://12go.asia/en/feed/travel/TG.csv
+Thailand                                            ,https://12go.asia/en/feed/travel/TH.csv
+Tajikistan                                          ,https://12go.asia/en/feed/travel/TJ.csv
+Tokelau                                         ,https://12go.asia/en/feed/travel/TK.csv
+Timor Leste                                         ,https://12go.asia/en/feed/travel/TL.csv
+Turkmenistan                                            ,https://12go.asia/en/feed/travel/TM.csv
+Tunisia                                         ,https://12go.asia/en/feed/travel/TN.csv
+Tonga                                           ,https://12go.asia/en/feed/travel/TO.csv
+Turkey                                          ,https://12go.asia/en/feed/travel/TR.csv
+Trinidad and Tobago                                         ,https://12go.asia/en/feed/travel/TT.csv
+Tristan da Cunha                                            ,https://12go.asia/en/feed/travel/TU.csv
+Tuvalu                                          ,https://12go.asia/en/feed/travel/TV.csv
+Taiwan                                          ,https://12go.asia/en/feed/travel/TW.csv
+Tanzania                                            ,https://12go.asia/en/feed/travel/TZ.csv
+Ukraine                                         ,https://12go.asia/en/feed/travel/UA.csv
+Uganda                                          ,https://12go.asia/en/feed/travel/UG.csv
+United States Minor Outlying Islands                                            ,https://12go.asia/en/feed/travel/UM.csv
+USA                                         ,https://12go.asia/en/feed/travel/US.csv
+Uruguay                                         ,https://12go.asia/en/feed/travel/UY.csv
+Uzbekistan                                          ,https://12go.asia/en/feed/travel/UZ.csv
+Vatican City                                            ,https://12go.asia/en/feed/travel/VA.csv
+Saint Vincent and the Grenadines                                            ,https://12go.asia/en/feed/travel/VC.csv
+Venezuela                                           ,https://12go.asia/en/feed/travel/VE.csv
+British Virgin Islands                                          ,https://12go.asia/en/feed/travel/VG.csv
+United States Virgin Islands                                            ,https://12go.asia/en/feed/travel/VI.csv
+Vietnam                                         ,https://12go.asia/en/feed/travel/VN.csv
+Vanuatu                                         ,https://12go.asia/en/feed/travel/VU.csv
+Wallis and Futuna                                           ,https://12go.asia/en/feed/travel/WF.csv
+Wake Island                                         ,https://12go.asia/en/feed/travel/WK.csv
+Samoa                                           ,https://12go.asia/en/feed/travel/WS.csv
+South Yemen                                         ,https://12go.asia/en/feed/travel/YD.csv
+Yemen                                           ,https://12go.asia/en/feed/travel/YE.csv
+Mayotte                                         ,https://12go.asia/en/feed/travel/YT.csv
+South Africa                                            ,https://12go.asia/en/feed/travel/ZA.csv
+Zambia                                          ,https://12go.asia/en/feed/travel/ZM.csv
+Zimbabwe                                            ,https://12go.asia/en/feed/travel/ZW.csv

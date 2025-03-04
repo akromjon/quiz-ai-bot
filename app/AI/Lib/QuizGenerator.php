@@ -69,7 +69,7 @@ final class QuizGenerator
      * @param int $numberOfQuizes Number of questions to generate
      * @param Language $language Language for the questions
      * @param Difficulty $difficulty Difficulty level
-     * @return string JSON string containing quiz data
+     * @return array JSON array containing quiz data
      * @throws RuntimeException If API call fails
      * @throws JsonException If JSON parsing fails
      */
@@ -79,7 +79,7 @@ final class QuizGenerator
         int $numberOfQuizes,
         Language $language,
         Difficulty $difficulty
-    ): string {
+    ): array {
         if (empty($text)) {
             throw new InvalidArgumentException('Input text cannot be empty');
         }
@@ -100,16 +100,22 @@ final class QuizGenerator
                 'response_format' => ['type' => 'json_object'],
             ]);
 
-            $quizData = $response->choices[0]->message->content ?? '';
+            $responseContent = $response->choices[0]->message->content ?? '';
 
-            if (empty($quizData)) {
+            if (empty($responseContent)) {
                 throw new RuntimeException('Empty response received from OpenAI');
             }
 
-            // Validate JSON structure
-            json_decode($quizData, true, 512, JSON_THROW_ON_ERROR);
+            $quizDataArray = json_decode($responseContent, true, 512, JSON_THROW_ON_ERROR);
 
-            return $quizData;
+            $quizDataArray['token_usage'] = [
+                'model'=> $model,
+                'prompt_tokens' => $response->usage->promptTokens,
+                'completion_tokens' => $response->usage->completionTokens,
+                'total_tokens' => $response->usage->totalTokens
+            ];
+
+            return $quizDataArray;
 
         } catch (\Exception $e) {
             throw new RuntimeException(

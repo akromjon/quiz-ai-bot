@@ -79,7 +79,7 @@ textarea:focus {
     margin-bottom: 1.5rem;
 }
 
-.format-selection > label {
+.format-selection>label {
     display: block;
     margin-bottom: 0.75rem;
     font-weight: 500;
@@ -115,13 +115,13 @@ textarea:focus {
     transition: all 0.3s ease;
 }
 
-.format-option input[type="radio"]:checked + label {
+.format-option input[type="radio"]:checked+label {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
 }
 
-.format-option input[type="radio"]:checked + label svg {
+.format-option input[type="radio"]:checked+label svg {
     stroke: white;
 }
 
@@ -196,6 +196,7 @@ textarea:focus {
         height: 16px;
     }
 }
+
 .counter-input {
     display: flex;
     align-items: center;
@@ -367,10 +368,12 @@ textarea:focus {
         transform: scale(0.95);
         opacity: 0.6;
     }
+
     50% {
         transform: scale(1.05);
         opacity: 0.3;
     }
+
     100% {
         transform: scale(0.95);
         opacity: 0.6;
@@ -381,19 +384,24 @@ textarea:focus {
     0% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(0px);
     }
 }
 
 @keyframes dots {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.5;
         transform: scale(1);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.2);
@@ -426,7 +434,7 @@ textarea:focus {
     }
 }
 
-body{
+body {
     margin: 0;
 }
 
@@ -558,3 +566,4 @@ body{
         font-size: 14px;
     }
 }
+

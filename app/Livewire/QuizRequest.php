@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use App\AI\Model\Model;
 use App\Enum\Difficulty;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
@@ -35,7 +36,7 @@ class QuizRequest extends Component
     protected function rules(): array
     {
         return [
-            'text' => ['required', 'min:3', 'max:2000'],
+            'text' => ['required', 'min:3', 'max:25000'],
             'number_of_question' => [
                 'required',
                 Rule::enum(type: NumberOfQuestion::class),
@@ -66,6 +67,7 @@ class QuizRequest extends Component
             'language' => $this->language,
             'difficulty' => $this->difficulty,
             'number_of_question' => $this->number_of_question,
+            'model'=>Model::GPT_4O,
         ]);
 
 

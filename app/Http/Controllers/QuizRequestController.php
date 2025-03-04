@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Status;
+use App\Models\QuizRequest;
+use App\Service\PdfService;
 use App\Service\WordService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -35,6 +38,31 @@ class QuizRequestController extends Controller
         }
 
         return Redirect::to($wordPath);
+    }
+
+    public function pdf(string $uuid): JsonResponse|RedirectResponse
+    {
+        $pdfPath = PdfService::make()->get($uuid);
+
+        if (empty($pdfPath)) {
+            return response()->json(status: 404);
+        }
+
+        return Redirect::to($pdfPath);
+    }
+
+    public function list(string $userUuid): View|JsonResponse
+    {
+        $quizRequests = QuizRequest::where('user_id', $userUuid)
+            ->where('status',Status::COMPLETED)
+            ->orderBy('created_at','desc')
+            ->paginate(30);
+
+        if ($quizRequests->isEmpty()) {
+            return response()->json(status: 404);
+        }
+
+        return view('pages.quiz.list.index', ['quiz_requests' => $quizRequests]);
     }
 
 }

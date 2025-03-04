@@ -6,7 +6,6 @@
     @yield('style')
     @yield('head')
 </head>
-
 <body>
     @yield('main')
     @yield('script')

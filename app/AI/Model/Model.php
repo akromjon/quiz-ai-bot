@@ -8,129 +8,88 @@ enum Model: string
     case GPT_4 = 'gpt-4';
     case GPT_3_5_TURBO = 'gpt-3.5-turbo-1106';
     case GPT_3_5_TURBO_16K = 'gpt-3.5-turbo-16k';
-    case GPT_4O='gpt-4o';
-    case GPT_4O_MINI= 'gpt-4o-mini';
+    case GPT_4O = 'gpt-4o';
+    case GPT_4O_MINI = 'gpt-4o-mini';
 
     /**
-     * Get the maximum tokens for the model
+     * Calculate the price in USD based on token usage
+     *
+     * @param int $promptTokens Number of tokens used in the prompt
+     * @param int $completionTokens Number of tokens used in the completion
+     * @return float Price in USD
      */
-    public function maxTokens(): int
+    public function calculatePrice(int $promptTokens, int $completionTokens): float
     {
-        return match($this) {
-            self::GPT_4_TURBO => 128000,
-            self::GPT_4 => 8192,
-            self::GPT_3_5_TURBO => 16385,
-            self::GPT_3_5_TURBO_16K => 16385,
+        $value= match($this) {
+            self::GPT_4_TURBO => ($promptTokens / 1000 * 0.01) + ($completionTokens / 1000 * 0.03),
+            self::GPT_4 => ($promptTokens / 1000 * 0.03) + ($completionTokens / 1000 * 0.06),
+            self::GPT_3_5_TURBO => ($promptTokens / 1000 * 0.0015) + ($completionTokens / 1000 * 0.002),
+            self::GPT_3_5_TURBO_16K => ($promptTokens / 1000 * 0.003) + ($completionTokens / 1000 * 0.004),
+            self::GPT_4O => ($promptTokens / 1000 * 0.005) + ($completionTokens / 1000 * 0.015),
+            self::GPT_4O_MINI => ($promptTokens / 1000 * 0.00015) + ($completionTokens / 1000 * 0.0006),
         };
+
+        return round($value,6);
     }
 
     /**
-     * Get the input cost per 1K tokens (in USD)
+     * Get the price per 1K tokens for input (prompt)
+     *
+     * @return float Price per 1K tokens for input
      */
-    public function inputCostPer1k(): float
+    public function getInputPrice(): float
     {
         return match($this) {
             self::GPT_4_TURBO => 0.01,
             self::GPT_4 => 0.03,
-            self::GPT_3_5_TURBO, self::GPT_3_5_TURBO_16K => 0.001,
+            self::GPT_3_5_TURBO => 0.0015,
+            self::GPT_3_5_TURBO_16K => 0.003,
+            self::GPT_4O => 0.005,
+            self::GPT_4O_MINI => 0.00015,
         };
     }
 
     /**
-     * Get the output cost per 1K tokens (in USD)
+     * Get the price per 1K tokens for output (completion)
+     *
+     * @return float Price per 1K tokens for output
      */
-    public function outputCostPer1k(): float
+    public function getOutputPrice(): float
     {
         return match($this) {
             self::GPT_4_TURBO => 0.03,
             self::GPT_4 => 0.06,
-            self::GPT_3_5_TURBO, self::GPT_3_5_TURBO_16K => 0.002,
+            self::GPT_3_5_TURBO => 0.002,
+            self::GPT_3_5_TURBO_16K => 0.004,
+            self::GPT_4O => 0.015,
+            self::GPT_4O_MINI => 0.0006,
         };
     }
 
     /**
-     * Check if the model supports JSON mode
-     */
-    public function supportsJsonMode(): bool
-    {
-        return match($this) {
-            self::GPT_4_TURBO, self::GPT_3_5_TURBO => true,
-            default => false,
-        };
-    }
-
-    /**
-     * Get recommended use cases for the model
+     * Calculate the price breakdown for token usage
      *
-     * @return array<string>
+     * @param int $promptTokens Number of tokens used in the prompt
+     * @param int $completionTokens Number of tokens used in the completion
+     * @return array Price breakdown details
      */
-    public function getRecommendedUses(): array
+    public function calculatePriceDetails(int $promptTokens, int $completionTokens): array
     {
-        return match($this) {
-            self::GPT_4_TURBO => [
-                'Complex analysis and reasoning',
-                'Code generation and debugging',
-                'Long-form content creation',
-                'Advanced JSON structure generation',
-                'Multi-step problem solving'
-            ],
-            self::GPT_4 => [
-                'High-accuracy tasks',
-                'Complex reasoning',
-                'Detailed analysis',
-                'Advanced code generation'
-            ],
-            self::GPT_3_5_TURBO => [
-                'General purpose tasks',
-                'Simple to moderate JSON generation',
-                'Basic code generation',
-                'Content creation',
-                'Question answering'
-            ],
-            self::GPT_3_5_TURBO_16K => [
-                'Long context processing',
-                'Document analysis',
-                'Large text summarization',
-                'Extended conversations'
-            ],
-        };
-    }
+        $inputPrice = ($promptTokens / 1000) * $this->getInputPrice();
+        $outputPrice = ($completionTokens / 1000) * $this->getOutputPrice();
+        $totalPrice = $inputPrice + $outputPrice;
 
-    /**
-     * Get all models that support JSON mode
-     *
-     * @return array<self>
-     */
-    public static function getJsonSupportedModels(): array
-    {
-        return array_filter(
-            self::cases(),
-            fn(self $model) => $model->supportsJsonMode()
-        );
-    }
-
-    /**
-     * Get the most cost-effective model for JSON output
-     */
-    public static function getMostEconomicalJsonModel(): self
-    {
-        return self::GPT_3_5_TURBO;
-    }
-
-    /**
-     * Get the most capable model for JSON output
-     */
-    public static function getMostCapableJsonModel(): self
-    {
-        return self::GPT_4_TURBO;
-    }
-
-    /**
-     * Estimate cost for a given number of tokens
-     */
-    public function estimateCost(int $inputTokens, int $outputTokens): float
-    {
-        return ($inputTokens / 1000 * $this->inputCostPer1k()) +
-               ($outputTokens / 1000 * $this->outputCostPer1k());
+        return [
+            'model' => $this->value,
+            'prompt_tokens' => $promptTokens,
+            'completion_tokens' => $completionTokens,
+            'total_tokens' => $promptTokens + $completionTokens,
+            'input_cost' => round($inputPrice, 6),
+            'output_cost' => round($outputPrice, 6),
+            'total_cost' => round($totalPrice, 6),
+            'input_rate' => $this->getInputPrice(),
+            'output_rate' => $this->getOutputPrice(),
+            'currency' => 'USD'
+        ];
     }
 }

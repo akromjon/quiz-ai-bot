@@ -57,22 +57,22 @@ class QuizService
         $generatedCount = count($quizData[self::EXPECTED_QUIZ_KEY]);
 
         if ($generatedCount > 0) {
-            $quizModel = $this->createQuizModel($quizData[self::EXPECTED_QUIZ_KEY]);
+            $quizModel = $this->createQuizModel($quizData);
             $this->createQuestions($quizModel, $quizData[self::EXPECTED_QUIZ_KEY]);
             $totalGenerated = $generatedCount;
         }
 
         // If we didn't generate all requested questions, try to generate the remaining ones
         if ($totalGenerated < $targetQuestionCount) {
-            $remainingQuestions = $targetQuestionCount - $totalGenerated;
+            $remainingQuestions = (int)($targetQuestionCount - $totalGenerated);
 
             // Generate only the remaining questions needed
             $additionalQuizData = $this->generateAndValidateQuiz($remainingQuestions);
             $additionalCount = count($additionalQuizData[self::EXPECTED_QUIZ_KEY]);
 
             if ($additionalCount > 0) {
-                $quizModel = $this->createQuizModel($additionalQuizData[self::EXPECTED_QUIZ_KEY]);
-                $this->createQuestions($quizModel, $additionalQuizData[self::EXPECTED_QUIZ_KEY]);
+                $quizModel = $this->createQuizModel($additionalQuizData);
+            $this->createQuestions($quizModel, $additionalQuizData[self::EXPECTED_QUIZ_KEY]);
                 $totalGenerated += $additionalCount;
             }
         }
@@ -98,10 +98,25 @@ class QuizService
             difficulty: $this->quizRequest->difficulty
         );
 
-        $quizData = json_decode($quiz, true) ?? [];
-        $this->validateQuizFormat($quizData);
+        $this->updateQuizRequest($quiz);
 
-        return $quizData;
+        $this->validateQuizFormat($quiz);
+
+        return $quiz;
+    }
+
+    private function updateQuizRequest(array $quiz): void
+    {
+        $tokenUsage=$quiz['token_usage'];
+
+        $this->quizRequest->update([
+            'total_price'=>$tokenUsage['model']->calculatePrice(
+                $tokenUsage['prompt_tokens'],
+                $tokenUsage['completion_tokens']
+            ),
+            'prompt_tokens'=>$tokenUsage['prompt_tokens'],
+            'completion_tokens'=>$tokenUsage['completion_tokens'],
+        ]);
     }
 
     private function validateQuizFormat(array $quizData): void
@@ -129,8 +144,10 @@ class QuizService
         }
     }
 
-    private function createQuizModel(array $quizzes): QuizModel
+    private function createQuizModel(array $quizData): QuizModel
     {
+        $quizzes=$quizData[self::EXPECTED_QUIZ_KEY];
+
         return QuizModel::create([
             'quiz_request_id' => $this->quizRequest->id,
             'type' => $this->quizRequest->type,

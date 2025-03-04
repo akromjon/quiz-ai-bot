@@ -1,7 +1,4 @@
-@section('head')
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endsection
+
 <div id="completedState" class="state-container">
     <div class="success-wrapper">
         <div class="success-animation">
@@ -48,35 +45,3 @@
     </div>
 </div>
 
-
-@section('script')
-<script>
-    function copyToClipboard(url) {
-        navigator.clipboard.writeText(url).then(() => {
-            Swal.fire({
-                toast: true,
-                icon: 'success',
-                title: 'Havola nusxalandi!',
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-        }).catch(err => {
-            Swal.fire({
-                toast: true,
-                icon: 'error',
-                title: 'Nusxalashda xatolik!',
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            console.error('Nusxalashda xatolik:', err);
-        });
-    }
-</script>
-@endsection

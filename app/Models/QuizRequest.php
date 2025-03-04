@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use App\AI\Model\Model as AIModel;
 
 class QuizRequest extends Model
 {
@@ -36,6 +37,7 @@ class QuizRequest extends Model
             'difficulty' => Difficulty::class,
             'format' => Format::class,
             'type' => Type::class,
+            'model'=> AIModel::class,
         ];
     }
 

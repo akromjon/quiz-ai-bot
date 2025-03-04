@@ -28,21 +28,10 @@ body {
     padding: 1rem;
     background-color: white;
 }
-.breadcrumb{
-    margin-bottom: 1rem;
-}
-.breadcrumb a{
-    color: var(--primary-color);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: fit-content;
-    font-weight: 600;
-}
 
 header {
     text-align: center;
+    margin-bottom: 1.5rem;
     padding: 0.5rem;
 }
 
@@ -155,11 +144,9 @@ textarea:focus {
     position: sticky;
     bottom: 1rem;
 }
-.submit-btn:hover{
-    background-color: var(--primary-color) !important;
-}
 
 .submit-btn:active {
+    background-color: var(--primary-hover);
     transform: translateY(1px);
 }
 
@@ -456,7 +443,7 @@ textarea:focus {
 
 .question-number {
     color: var(--primary-color);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
 }
 
@@ -465,55 +452,25 @@ textarea:focus {
     margin-bottom: 1rem;
 }
 
-
-
-
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
 
 .option {
     display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    padding: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .option input[type="radio"] {
     accent-color: var(--primary-color);
-    width: 1.5rem;
-    height: 1.5rem;
-    min-width: 1.5rem; /* Added to prevent shrinking */
-    flex-shrink: 0;    /* Added to prevent shrinking */
-    cursor: pointer;
-    margin-top: 0.2rem;
 }
 
 .option label {
-    font-size: 1.1rem;
-    cursor: pointer;
-    line-height: 1.4;
-    flex: 1;           /* Added to allow label to take remaining space */
+    font-size: 1rem;
 }
-
-
-
-/* For multiple choice questions - display in 2 columns */
-.question-card .options:not(.true-false) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-/* Responsive design for small screens */
-@media (max-width: 768px) {
-    .question-card .options:not(.true-false) {
-        grid-template-columns: 1fr;
-    }
-
-    .true-false.options {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 
 .short-answer input,
 .fill-blank input {
@@ -533,19 +490,239 @@ textarea:focus {
 .actions {
     display: flex;
     justify-content: center;
-    gap: 1rem;
     margin-top: 2rem;
 }
 
-.submit-btn.primary-btn {
+.actions .submit-btn {
+    flex-direction: row-reverse;
+}
+
+.actions .submit-btn svg {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+.quiz-list {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    padding: 1rem;
+}
+
+.quiz-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.quiz-date {
+    font-size: 0.875rem;
+    background: var(--background-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.quiz-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.stat-icon {
+    background: var(--background-color);
+    padding: 0.75rem;
+    border-radius: 12px;
+    color: var(--primary-color);
+}
+
+.stat-value {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.quiz-actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+/* Updated button styles with colors */
+.primary-action {
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+}
+
+.primary-action:hover {
+    opacity: 0.9;
+}
+
+.pdf-action {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.pdf-action:hover {
+    background: #fee2e2;
+}
+
+.word-action {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.word-action:hover {
+    background: #dbeafe;
+}
+
+.link-action {
+    background: #f0fdf4;
+    color: #16a34a;
+}
+
+.link-action:hover {
+    background: #dcfce7;
+}
+
+@media (max-width: 768px) {
+    .quiz-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .action-btn {
+        width: 100%;
+        padding: 0.875rem;
+        justify-content: space-between;
+        text-decoration: none;
+    }
+
+    .primary-action {
+        order: -1;
+        justify-content: center;
+    }
+
+    .action-btn svg {
+        order: 2;
+    }
+}
+
+/* Pagination Container */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+/* Individual page links */
+.pagination > * {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* Active page */
+.pagination .active {
     background-color: var(--primary-color);
     color: white;
 }
 
-.submit-btn.primary-btn:hover {
-    background-color: var(--primary-dark-color);
+/* Disabled state (like prev/next when on first/last page) */
+.pagination .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.submit-btn.primary-btn svg {
-    margin-right: 0.5rem;
+/* Hover state for interactive elements */
+.pagination > *:not(.active):not(.disabled):hover {
+    background-color: var(--secondary-bg);
+    color: var(--primary-color);
+}
+
+/* Previous/Next buttons */
+.pagination .prev-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+    .pagination {
+        gap: 0.25rem;
+    }
+
+    .pagination > * {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 0.5rem;
+        font-size: 0.8125rem;
+    }
+
+    /* Hide some page numbers on mobile */
+    .pagination > *:not(.active):not(.prev-next):not(:first-child):not(:last-child) {
+        display: none;
+    }
 }
